@@ -1,5 +1,5 @@
 def call(Map args = [:]) {
-  def image   = args.get('image', 'jenkins-dotnet-agent:8.0')
+  def image   = args.get('image', 'mcr.microsoft.com/dotnet/sdk:9.0')
   def config  = args.get('config', 'Release')
   def results = args.get('resultsDir', 'TestResults')
 
@@ -16,8 +16,9 @@ def call(Map args = [:]) {
     """
 
     step([$class: 'MSTestPublisher',
-          testResultsFile: "**/${results}/*.trx",
-          failOnError: false,
-          keepLongStdio: true])
+      testResultsFile: "**/${results}/*.trx",
+      failOnError: false,
+      keepLongStdio: true
+    ])
   }
 }
